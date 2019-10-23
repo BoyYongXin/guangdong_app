@@ -8,8 +8,8 @@ tab_list = ['urls', 'site_info', 'content_info']  # 配置表(第一个须为url
 tab_unique_key_list = ['url', 'site_id', 'url']  # 唯一索引
 tab_ensure_index_list = [['depth', 'status'], ['read_status'], ['read_status']]  # 配置索引(加快查找速度)
 
-parser_list = [yi_shenzhen]
-parser_list = [touchtv]
+parser_list = [yi_shenzhen,touchtv,quanming_tv]
+parser_list = [xunlei]
 parser_siteid_list = []  # 对应parser的site_id
 for parser in parser_list:
     site_id = parser.SITE_ID
