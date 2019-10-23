@@ -1,0 +1,71 @@
+{
+  "list": [
+    {
+      "channelId": 3,
+      "channelName": "首页视频",
+      "md5hash": "419a9cfc57b16d49ca695ffbf99819f5",
+      "signature": "1V++n2s/4OmqHI6KrvTM8wXTJPamWTdZtorCAmH3RK8=",
+      "ts": "1571707839745",
+      "timestamp": "1571712271790"
+    },
+    {
+    "channelId": 570,
+    "channelName": "推荐",
+    "md5hash": "5d88e11aaa4d9b27793b068813b55a67",
+    "signature": "9u3wCPkiNKEInJStD2Ch5bcdfDPO8JxngDg5ECx6Wp8=",
+    "ts": "1571727440524",
+    "timestamp": "1571727440543"
+},
+{
+    "channelId": 571,
+    "channelName": "社会",
+    "md5hash": "4d8ab628b240e4f712a448ba421f001d",
+    "signature": "blZkU9rr/qhVwMveHFvQs0kLFv9dXpP+yMUPw21NQkg=",
+    "ts": "1571732208518",
+    "timestamp": "1571732208523"
+},
+{
+    "channelId": 572,
+    "channelName": "娱乐",
+    "md5hash": "a8345682d6aca903a16bc7733b2ac63a",
+    "signature": "M6eISo8/T8UBeQS6YMwsKEZIS1cWmom63+GsMET/QS4=",
+    "ts": "1571732549532",
+    "timestamp": "1571732549543"
+
+},
+{
+    "channelId": 575,
+    "channelName": "搞笑",
+    "md5hash": "73710b03b19f6309a902f9646904bed4",
+    "signature": "VbiSJh9S2l3pa3E+yiAh5V9aSCN6QvoqabjyIBWfpY4=",
+    "ts": "1571732633647",
+    "timestamp": "1571732633656"
+},
+{
+    "channelId": 660,
+    "channelName": "美食",
+    "md5hash": "6f4de05a80d3c0526e539d61aad06775",
+    "signature": "RFEOsxQw4KoKGXLfFhdFdT6SgTgSn4toKmtJCcy9phI=",
+    "ts": "1571732734734",
+    "timestamp": "1571732734757"
+
+},
+{
+    "channelId": 574,
+    "channelName": "科技",
+    "md5hash": "762d07bde91d59103df4d5080f67fa3d",
+    "signature": "HpuNNSfbh1UUeJkcGhn4QRPS3rkSNoYrlboNxUxCCV4=",
+    "ts": "1571732920920",
+    "timestamp": "1571732920927"
+},
+{
+    "channelId": 573,
+    "channelName": "体育",
+    "md5hash": "4e20b9f97dfadb999b73189eb9a27675",
+    "signature": "zLOeQTr8ae6SE6Dv1Z9VceV99TpgsoWSlGFw5ADNB5s=",
+    "ts": "1571733005674",
+    "timestamp": "1571733005701"
+}
+
+  ]
+}
