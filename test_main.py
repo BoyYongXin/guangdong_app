@@ -1,6 +1,11 @@
 # *_*coding:utf-8 *_*
 import requests
-
+import jsonpath
+from glom import glom
+import re
+import utils.get_token as get_token
+import utils.tools as tools
+import time
 headers = {
     'Host': 'iflow.uczzd.cn',
     'Proxy-Connection': 'keep-alive',
@@ -9,12 +14,34 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (Linux; Android 7.0; TRT-AL00A Build/HUAWEITRT-AL00A; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/64.0.3282.137 Mobile Safari/537.36 iThunder',
 
 }
-url = '''http://iflow.uczzd.cn/iflow/api/v1/channel/10478?method=new&ftime=0&recoid=&count=20&content_ratio=100&content_length=2048&app=uc-iflow&no_op=0&auto=1&_tm=1571797441354&tab=video_b&uc_param_str=dnnivebichfrmintcpgidsudsvmedizbssnwlobd&user_tag=bTkwBCMI9ECHLVDocw%3D%3D&sp_gz=3&enable_ad=1&ad_extra=AAPtYwIQWftB3nixavZFw3Q8&earphone=0&moving=-1&cindex=1&active_time=AAPSz1bLoxw0fekX0G4QBei8&oneid=AAN71B5Y913agsh0%2BVluCpQUBehuQJREqZgs6ktePT34jQ%3D%3D&enod=AASCI1UF50vzsp6cPoG1Ye%2FRMSSjs4w5gFEPS9OD%2FS0zV%2F0DG4Bzx6g9ekZF2fxWsDo%3D&ssign=AAM761YwTffoCdGxARwVNY62TmjF9LjSoKwc%2BGr8%2FATHldVlrOgBus1PMg3CgWGZ59U%3D&dn=40729532011-06c59295&nn=AARroYxsshvCO8B0sRlz0w9ZcCczdfQBaUwibhDZy2pKTQ%3D%3D&ve=12.7.0.1050&bi=34464&ch=yzappstore%40&fr=android&mi=TRT-AL00A&nt=2&pc=AAQToG73q5JEnWuPgTs0XDUb%2FVhv8bJYxHOubMHEhWRKnn5UMxzpCHufr9S9fSmAmtIJEANmor98uewR0IfM%2BpVW&gp=AAQTetJlylrx97EJw24rax3efHC96L0kVcZH3kMra0Ywug%3D%3D&ut=AARfL5PV8mGmROGWAeobTqxvQuLcRj3gkp7%2BNBp%2BLKFTdw%3D%3D&ai=&sv=ucrelease&me=AARX9BUwG0%2FLzAZg3EoxTKsZ&di=f9233a75e11ce136&zb=00000&ss=360x604&nw=WIFI&lo=AAQToG73q5JEnWuPgTs0XDUb%2FVhv8bJYxHOubMHEhWRKnn5UMxzpCHufr9S9fSmAmtIYK4WUa9xYhWR6jxAcii2kUed2shQwg%2FhDwsVl3T6OS3y3eW0Ag57v0YMy4ot%2F%2FVtXjkgnNUozEOp2aCIwgClFYh2mUgR4ABsca%2FgF7iyhKg%3D%3D&bd=huawei&xss_enc=31&ab_tag=2261F2;2130B2;2299A2;2342A2;1979B2;1982C2;2384D2;2154A2;2351A2;&zb=00000&puser=1&ressc=44'''
+url = '''http://iflow.uczzd.cn/iflow/api/v1/channel/622810092?method=new&ftime=1571902273506&recoid=6995844991074725827&count=20&content_ratio=100'''
 
 response = requests.get(url,headers=headers,verify=False)
-# print(response.encoding)
+time.sleep(1)
 response.encoding = 'utf-8'
-# response.encoding = encoding = response.apparent_encoding
-html = response.text
+html = response.json()
+data_info = jsonpath.jsonpath(html,"$..articles")
+for datas in data_info:
+    for key,data in datas.items():
+        title = data.get('title')
+        url = data.get('url')
+        ums_id_url = data.get("zzd_url")
+        img_url = glom(data,"videos")[0]['poster']['url']
+        release_time = glom(data,'grab_time')
+        print(title)
+        print(url)
+        print(img_url)
+        print(release_time)
 
-print(html)
+        ums_id =''.join(re.findall('ums_id=(.*?)&',ums_id_url))
+        wm_id = ''.join(jsonpath.jsonpath(data, '$..wm_id'))
+        wm_cid = ''.join(jsonpath.jsonpath(data, '$..outer_id'))
+        share_url = glom(data,"share_url")
+
+        token = get_token.get_cookies(share_url)
+        video_url_info_url = f'https://mparticle.uc.cn/api/vps?token={token}&ums_id={ums_id}&wm_cid={wm_cid}&wm_id={wm_id}&resolution=high'
+        video_url_info = tools.get_json_by_requests(video_url_info_url)
+        time.sleep(1)
+        video_url = glom(video_url_info,'data.url')
+        print(video_url)
+        break
